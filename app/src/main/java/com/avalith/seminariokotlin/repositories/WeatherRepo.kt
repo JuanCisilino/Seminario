@@ -8,8 +8,8 @@ class WeatherRepo {
     private val retrofitService: WeatherService by lazy { RetrofitClient.builderRetrofit()
         .create(WeatherService::class.java) }
 
-    fun getWeather() = retrofitService.getWeather(
+    fun getWeather(location: String) = retrofitService.getWeather(
         "2f6203ebda094a59803185629212110",
-        "Buenos Aires")
+        location)
 
 }
