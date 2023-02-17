@@ -25,7 +25,7 @@ class MainViewModel: ViewModel() {
     val dataLiveData = MutableLiveData<List<Post>>()
 
     private val weatherRepo = WeatherRepo()
-    private val firebaseRepo = FirebaseRepo()
+    private lateinit var firebaseRepo : FirebaseRepo
 
     fun getWeather(context: Context?, location: Location?=null){
         context?.let { getWeatherData(geocode(it, location!!)) }
@@ -53,6 +53,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun getPosts() {
+        firebaseRepo = FirebaseRepo()
         val postList = ArrayList<Post>()
         firebaseRepo.getPosts().addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
